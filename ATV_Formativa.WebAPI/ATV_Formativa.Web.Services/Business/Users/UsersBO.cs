@@ -16,7 +16,7 @@ namespace ATV_Formativa.Web.API.Business.Users
             throw new NotImplementedException();
         }
 
-        public Task<Response<List<Models.Users.Users>>> Get(IFilter filtro)
+        public Task<Response> GetAll(IFilter filtro)
         {
             throw new NotImplementedException();
         }
