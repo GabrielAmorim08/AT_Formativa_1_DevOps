@@ -17,12 +17,12 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
-
+     
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ATV_Formativa.WebAPI/ATV_Formativa.WebAPI.sln
 
       - name: Build
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build ATV_Formativa.WebAPI/ATV_Formativa.WebAPI.sln --no-restore --configuration Release
 
       - name: Run tests
-        run: dotnet test --no-build --verbosity normal
+        run: dotnet test ATV_Formativa.WebAPI/ATV_Formativa.WebAPI.sln --no-build --verbosity normal

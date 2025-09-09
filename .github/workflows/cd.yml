@@ -18,10 +18,10 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ATV_Formativa.WebAPI/ATV_Formativa.WebAPI.sln
 
       - name: Publish project
-        run: dotnet publish -c Release -o ./publish
+        run: dotnet publish ATV_Formativa.WebAPI/ATV_Formativa.WebAPI.sln -c Release -o ./publish
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
