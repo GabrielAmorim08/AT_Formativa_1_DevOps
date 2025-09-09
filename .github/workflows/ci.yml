@@ -1,0 +1,28 @@
+name: CI - Build & Test
+
+on:
+  pull_request:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+     
+      - name: Restore dependencies
+        run: dotnet restore ATV_Formativa.WebAPI/ATV_Formativa.WebAPI.sln
+
+      - name: Build
+        run: dotnet build ATV_Formativa.WebAPI/ATV_Formativa.WebAPI.sln --no-restore --configuration Release
+
+      - name: Run tests
+        run: dotnet test ATV_Formativa.WebAPI/ATV_Formativa.WebAPI.sln --no-build --verbosity normal
