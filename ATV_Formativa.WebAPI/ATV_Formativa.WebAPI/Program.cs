@@ -1,3 +1,7 @@
+using ATV_Formativa.WebAPI.Utils;
+using ATV_Formativa.WebAPI.Wrapper;
+using ATV_Formativa.WebAPI.Wrapper.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +11,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddTransient<IDbConnectionFactory, DbConnectionFactory>();
+builder.Services.AddTransient<IDbWrapper>(sp => {
+    var factory = sp.GetRequiredService<IDbConnectionFactory>();
+    return new DbWrapper(factory, Common.DataBase.ConnDB);
+});
+builder.Services.AddTransient<IDbWrapperFactory, DbWrapperFactory>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,5 +31,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+Common.ConnDB = builder.Configuration.GetConnectionString("ConnDB") ?? string.Empty;
 
 app.Run();
