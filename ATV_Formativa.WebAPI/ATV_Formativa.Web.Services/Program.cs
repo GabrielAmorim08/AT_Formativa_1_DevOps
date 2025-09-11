@@ -21,14 +21,13 @@ builder.Services.AddTransient<IDbWrapper>(sp => {
 builder.Services.AddTransient<IDbWrapperFactory, DbWrapperFactory>();
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
     app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
+    app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "ATV_Formativa API V1");
+    c.RoutePrefix = string.Empty; 
+});
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
