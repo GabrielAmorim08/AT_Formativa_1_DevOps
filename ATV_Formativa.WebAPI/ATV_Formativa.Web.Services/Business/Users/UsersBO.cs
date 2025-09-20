@@ -8,7 +8,8 @@ namespace ATV_Formativa.Web.API.Business.Users
     {
         public Task<Response> Create(Models.Users.Users record)
         {
-            Console.WriteLine("Commit de teste")
+            Console.WriteLine("Commit de teste");
+            
             throw new NotImplementedException();
         }
 
