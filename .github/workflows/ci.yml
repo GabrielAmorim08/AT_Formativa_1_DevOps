@@ -27,19 +27,18 @@ jobs:
       - name: Run tests
         run: dotnet test ATV_Formativa.WebAPI/ATV_Formativa.WebAPI.sln --no-build --verbosity normal
 
-    discord:
-        needs: build
-        runs-on: ubuntu-latest
-        steps:
-          - name: Notificação Discord
-            if: always() 
-            run: |
-              status="✅ Build e testes passaram!"
-              if [ "${{ needs.build.result }}" != "success" ]; then
-                status="❌ Build ou testes falharam!"
-              fi
-
-              curl -H "Content-Type: application/json" \
-                -X POST \
-                -d "{\"content\": \"$status\n🔗 Repositório: ${{ github.repository }}\n▶️ Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
-                ${{ secrets.DISCORD_WEBHOOK_URL }}
+  discord:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notificação Discord
+        if: always() 
+        run: |
+          status="✅ Build e testes passaram!"
+          if [ "${{ needs.build.result }}" != "success" ]; then
+            status="❌ Build ou testes falharam!"
+          fi
+          curl -H "Content-Type: application/json" \
+            -X POST \
+            -d "{\"content\": \"$status\n🔗 Repositório: ${{ github.repository }}\n▶️ Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}  
