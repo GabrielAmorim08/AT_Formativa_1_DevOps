@@ -1,4 +1,4 @@
-name: Run .NET 8 Tests
+name: Run  Tests
 
 on:
   push:
@@ -14,10 +14,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Setup .NET 8
+    - name: Setup .NET 9
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.0.x'
+        dotnet-version: '9.0.x'
 
     - name: Restore dependencies
       run: dotnet restore ATV_Formativa.WebAPI/ATV_Formativa.WebAPI.sln
