@@ -1,4 +1,4 @@
-name: .NET Tests
+name: Run .NET 8 Tests
 
 on:
   push:
@@ -7,23 +7,24 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Setup .NET
+    - name: Setup .NET 8
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.0.x' 
+        dotnet-version: '8.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ATV_Formativa.WebAPI/ATV_Formativa.WebAPI.sln
 
-    - name: Build
-      run: dotnet build --no-restore
+    - name: Build solution
+      run: dotnet build ATV_Formativa.WebAPI/ATV_Formativa.WebAPI.sln --configuration Release
 
     - name: Run tests
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test ATV_Formativa.WebAPI/ATV_Formativa.WebAPI.sln --verbosity normal
+
