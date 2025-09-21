@@ -25,7 +25,7 @@ jobs:
         run: dotnet build ATV_Formativa.WebAPI/ATV_Formativa.WebAPI.sln --no-restore --configuration Release
 
       - name: Run tests
-        run: dotnet test ATV_Formativa.WebAPI/ATV_Formativa.WebAPI.sln --no-build --verbosity normal
+        run: dotnet test ATV_Formativa.WebAPI/ATV_Formativa.WebAPI.sln  --configuration Release --no-build --verbosity normal
 
   discord:
     needs: build
